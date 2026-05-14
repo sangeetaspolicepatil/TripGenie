@@ -1,0 +1,12 @@
+flask
+flask-socketio
+groq
+flask-cors
+geopy
+python-dotenv
+requests
+eventlet
+pymongo
+certifi
+mongomock
+dnspython
