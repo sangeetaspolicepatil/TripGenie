@@ -5,9 +5,9 @@ flask-cors
 geopy
 python-dotenv
 requests
-eventlet
+gevent
 pymongo
 certifi
 mongomock
 dnspython
-gunicorn[eventlet]
+gunicorn[gevent]
