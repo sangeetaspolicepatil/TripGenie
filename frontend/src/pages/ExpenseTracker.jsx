@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Wallet, PieChart, Plus, Trash2, Tag, Calendar as CalIcon } from 'lucide-react';
+import { Wallet, PieChart, Plus } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
+import API_BASE_URL from '../config';
 
 export default function ExpenseTracker() {
   const { user, token } = useAuth();
   const [expenses, setExpenses] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [showAdd, setShowAdd] = useState(false);
   const [form, setForm] = useState({ category: 'Food', amount: '', description: '' });
 
@@ -17,14 +17,13 @@ export default function ExpenseTracker() {
     // Fetch expenses for current trip (simplified for now)
     const fetchExpenses = async () => {
       try {
-        const res = await axios.get("http://127.0.0.1:5000/expenses/trip/latest", {
+        const res = await axios.get(`${API_BASE_URL}/expenses/trip/latest`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setExpenses(res.data);
       } catch (e) {
         console.error(e);
       }
-      setLoading(false);
     };
     fetchExpenses();
   }, [token]);
@@ -32,7 +31,7 @@ export default function ExpenseTracker() {
   const handleAdd = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://127.0.0.1:5000/expenses/add", {
+      const res = await axios.post(`${API_BASE_URL}/expenses/add`, {
         ...form,
         user_id: user.id,
         trip_id: 'latest' // Simplified

@@ -2,8 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageSquare, Send, X, Activity } from 'lucide-react';
 import { io } from 'socket.io-client';
+import API_BASE_URL from '../config';
 
-const socket = io("http://127.0.0.1:5000");
+const socket = io(API_BASE_URL);
 
 export default function ChatAssistant() {
   const [isOpen, setIsOpen] = useState(false);

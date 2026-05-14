@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { MapPin, Calendar, Wallet, Compass, Plane, Train, Sparkles, Activity } from 'lucide-react';
+import { MapPin, Calendar, Wallet, Compass, Plane, Sparkles, Activity } from 'lucide-react';
 import axios from 'axios';
+import API_BASE_URL from '../config';
 
 export default function PlanTrip() {
   const [form, setForm] = useState({
@@ -27,7 +28,7 @@ export default function PlanTrip() {
     setLoading(true);
     const days = calculateDays();
     try {
-      const res = await axios.post("http://127.0.0.1:5000/ai/plan", { ...form, days });
+      const res = await axios.post(`${API_BASE_URL}/ai/plan`, { ...form, days });
       // Store current plan in session storage or state management to pass to Details page
       sessionStorage.setItem('currentPlan', JSON.stringify({ plan: res.data, form: { ...form, days } }));
       navigate('/trip/new');

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Sparkles, Mail, Lock, User, ArrowRight, Loader2 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
+import API_BASE_URL from '../config';
 
 export default function Auth() {
   const [loading, setLoading] = useState(false);
@@ -22,7 +23,7 @@ export default function Auth() {
     setLoading(true);
     try {
       const endpoint = isLogin ? '/auth/login' : '/auth/register';
-      const res = await axios.post(`http://127.0.0.1:5000${endpoint}`, form);
+      const res = await axios.post(`${API_BASE_URL}${endpoint}`, form);
       
       if (isLogin) {
         login(res.data.user, res.data.token);

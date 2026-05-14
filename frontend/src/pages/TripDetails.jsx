@@ -13,6 +13,8 @@ import axios from 'axios';
 import ChatAssistant from '../components/ChatAssistant';
 import MapComponent from '../components/MapComponent';
 
+import API_BASE_URL from '../config';
+
 export default function TripDetails() {
   const [data, setData] = useState(null);
   const [activeTab, setActiveTab] = useState("itinerary");
@@ -79,7 +81,7 @@ export default function TripDetails() {
       return;
     }
     try {
-      await axios.post("http://127.0.0.1:5000/trips/save", {
+      await axios.post(`${API_BASE_URL}/trips/save`, {
         destination: form.destination,
         plan: plan,
         form_details: form
@@ -128,7 +130,7 @@ export default function TripDetails() {
             </button>
             <button onClick={async () => {
               try {
-                await axios.post("http://127.0.0.1:5000/community/share", {
+                await axios.post(`${API_BASE_URL}/community/share`, {
                   user_id: user?._id,
                   user_name: user?.name,
                   destination: form.destination,

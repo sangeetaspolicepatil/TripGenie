@@ -4,11 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import { MapPin, Calendar, Trash2, ExternalLink, Loader2 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
+import API_BASE_URL from '../config';
 
 export default function SavedTrips() {
   const [trips, setTrips] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { token, user } = useAuth();
+  const { token } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,7 +20,7 @@ export default function SavedTrips() {
 
     const fetchTrips = async () => {
       try {
-        const res = await axios.get("http://127.0.0.1:5000/trips/all", {
+        const res = await axios.get(`${API_BASE_URL}/trips/all`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setTrips(res.data);
@@ -35,7 +36,7 @@ export default function SavedTrips() {
   const deleteTrip = async (id) => {
     if (!window.confirm("Are you sure you want to delete this trip?")) return;
     try {
-      await axios.delete(`http://127.0.0.1:5000/trips/${id}`, {
+      await axios.delete(`${API_BASE_URL}/trips/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setTrips(trips.filter(t => t._id !== id));

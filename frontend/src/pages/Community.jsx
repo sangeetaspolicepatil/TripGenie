@@ -1,29 +1,28 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Users, Heart, MessageCircle, Share2, Globe, TrendingUp } from 'lucide-react';
+import { Heart, MessageCircle, Share2, Globe, TrendingUp } from 'lucide-react';
 import axios from 'axios';
+import API_BASE_URL from '../config';
 
 export default function Community() {
   const [activeTab, setActiveTab] = useState('itineraries');
   const [trips, setTrips] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   React.useEffect(() => {
     const fetchCommunity = async () => {
       try {
-        const res = await axios.get("http://127.0.0.1:5000/community/all");
+        const res = await axios.get(`${API_BASE_URL}/community/all`);
         setTrips(res.data);
       } catch (e) {
         console.error("Error fetching community:", e);
       }
-      setLoading(false);
     };
     fetchCommunity();
   }, []);
 
   const handleLike = async (id) => {
     try {
-      await axios.post(`http://127.0.0.1:5000/community/like/${id}`);
+      await axios.post(`${API_BASE_URL}/community/like/${id}`);
       setTrips(trips.map(t => t._id === id ? { ...t, likes: (t.likes || 0) + 1 } : t));
     } catch (e) {
       console.error(e);

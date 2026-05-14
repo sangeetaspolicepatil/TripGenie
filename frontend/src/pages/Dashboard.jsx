@@ -7,23 +7,22 @@ import {
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
+import API_BASE_URL from '../config';
 
 export default function Dashboard() {
   const { user, token } = useAuth();
   const [trips, setTrips] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchRecentTrips = async () => {
       try {
-        const res = await axios.get("http://127.0.0.1:5000/trips/all", {
+        const res = await axios.get(`${API_BASE_URL}/trips/all`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setTrips(res.data.slice(0, 3));
       } catch (e) {
         console.error(e);
       }
-      setLoading(false);
     };
     if (token) fetchRecentTrips();
   }, [token]);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Sparkles, Map as MapIcon, Activity, Compass, Globe } from 'lucide-react';
+import { Sparkles, Map as MapIcon, Activity } from 'lucide-react';
 
 export default function Home() {
   return (

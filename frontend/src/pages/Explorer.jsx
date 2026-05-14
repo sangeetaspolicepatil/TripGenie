@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import { Sun, CloudRain, Wind, AlertTriangle, ShieldAlert, Navigation, Briefcase, Camera } from 'lucide-react';
-
 export default function Explorer() {
-  const [destination, setDestination] = useState("Paris");
+  const [destination] = useState("Paris");
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-12">
