@@ -10,4 +10,5 @@ pymongo
 certifi
 mongomock
 dnspython
+PyJWT
 gunicorn[gevent]
