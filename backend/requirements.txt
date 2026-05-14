@@ -10,4 +10,4 @@ pymongo
 certifi
 mongomock
 dnspython
-gunicorn
+gunicorn[eventlet]
